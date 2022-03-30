@@ -55,6 +55,19 @@ impl Sub<Self> for Tuple {
         }
     }
 }
+
+impl Neg for Tuple {
+    type Output = Self;
+    fn neg(self) -> Self {
+        Self {
+            x: -self.x,
+            y: -self.y,
+            z: -self.z,
+            w: -self.w,
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -112,5 +125,12 @@ mod tests {
         let exp = Tuple::vector(-2.0, 3.0, 1.0);
         let act = a - b;
         assert_fuzzy_eq!(act, exp);
+    }
+
+    #[test]
+    fn sub_vec_pt_test() {
+        let a = Tuple::point(3.0, 2.0, 1.0);
+        let b = Tuple::vector(5.0, 6.0, 7.0);
+        assert_fuzzy_eq!(a - b, Tuple::point(-2.0, -4.0, -6.0));
     }
 }
