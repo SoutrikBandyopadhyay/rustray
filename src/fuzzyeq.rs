@@ -1,4 +1,3 @@
-use crate::canvas::*;
 use crate::datastruct::*;
 
 use crate::EPSILON;
@@ -59,6 +58,7 @@ macro_rules! assert_fuzzy_ne {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::canvas::*;
 
     #[test]
     fn fuzzy_f64_equality_test() {
