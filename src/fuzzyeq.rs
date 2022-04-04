@@ -24,11 +24,6 @@ impl FuzzyEq<Tuple> for Tuple {
     }
 }
 
-impl FuzzyEq<Color> for Color {
-    fn fuzzy_eq(&self, other: Color) -> bool {
-        self.r.fuzzy_eq(other.r) && self.g.fuzzy_eq(other.g) && self.b.fuzzy_eq(other.b)
-    }
-}
 #[macro_export]
 macro_rules! assert_fuzzy_eq {
     ($left:expr, $right:expr $(,)?) => {{
