@@ -1,4 +1,6 @@
+use crate::canvas::*;
 use crate::datastruct::*;
+
 use crate::EPSILON;
 pub trait FuzzyEq<T> {
     fn fuzzy_eq(&self, other: T) -> bool;
@@ -22,6 +24,11 @@ impl FuzzyEq<Tuple> for Tuple {
     }
 }
 
+impl FuzzyEq<Color> for Color {
+    fn fuzzy_eq(&self, other: Color) -> bool {
+        self.r.fuzzy_eq(other.r) && self.g.fuzzy_eq(other.g) && self.b.fuzzy_eq(other.b)
+    }
+}
 #[macro_export]
 macro_rules! assert_fuzzy_eq {
     ($left:expr, $right:expr $(,)?) => {{
@@ -77,5 +84,19 @@ mod tests {
         let actual = Tuple::point(1.000, 2.0, 3.0);
         let expected = Tuple::point(1.000, 2.0, 3.0);
         assert_fuzzy_eq!(actual, expected);
+    }
+
+    #[test]
+    fn color_fuzzy_equality_test() {
+        let c1 = Color::new(1.0, 0.00009, 1.001);
+        let c2 = Color::new(1.00000, 0.00009000, 1.001);
+        assert_fuzzy_eq!(c1, c2);
+    }
+
+    #[test]
+    fn color_fuzzy_inequality_test() {
+        let c1 = Color::new(1.0, 0.00009, 1.001);
+        let c2 = Color::new(1.00000, 0.0009001, 1.001);
+        assert_fuzzy_ne!(c1, c2);
     }
 }
