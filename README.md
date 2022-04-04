@@ -1,2 +1,11 @@
+<h1 align=center>
+rustray
+</h1>
 
-<a href="https://github.com/Samyak2/toipe/actions/workflows/lints-and-checks.yml"><img src="https://github.com/SoutrikBandyopadhyay/rustray/actions/workflows/lints-and-checks.yml/badge.svg" alt="Lints and checks badge" /></a>
+<p align="center">
+Yet another Ray-tracing implementation written in Rust
+</p>
+
+<p align="center">
+<a href="https://github.com/SoutrikBandyopadhyay/rustray/actions/workflows/lints-and-checks.yml"><img src="https://github.com/SoutrikBandyopadhyay/rustray/actions/workflows/lints-and-checks.yml/badge.svg" alt="Lints and checks badge" /></a>
+</p>
