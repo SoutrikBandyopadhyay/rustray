@@ -1,4 +1,9 @@
+use rustray::canvas::to_ppm::*;
+
+use rustray::canvas::*;
+use rustray::color;
 use rustray::datastruct::*;
+use std::fs::write;
 
 #[derive(Debug, Copy, Clone)]
 struct Projectile {
@@ -34,9 +39,19 @@ pub fn main() {
     let wind = Tuple::vector(-0.01, 0.0, 0.0);
     let env = Environment::new(wind, gravity);
 
+    const WIDTH: usize = 1000;
+    const HEIGHT: usize = 1000;
+
+    let mut canvas = Canvas::new(WIDTH, HEIGHT);
+
     let mut ball = Projectile::new(pos, vel);
-    for _ in 0..100 {
+    for i in 0..100 {
         tick(env, &mut ball);
+
         println!("ball.position = {:?}", ball.position);
+        canvas.write_pixel(i, 50, color!(1.0));
     }
+
+    let ppm = canvas.to_ppm();
+    write("./output.ppm", ppm).expect("Unable to write");
 }

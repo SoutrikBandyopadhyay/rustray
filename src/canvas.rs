@@ -148,6 +148,19 @@ impl Canvas {
         y * self.width + x
     }
 }
+#[macro_export]
+macro_rules! color {
+    ($r:expr, $g:expr,$b:expr $(,)?) => {{
+        match ($r, $g, $b) {
+            (red, green, blue) => Color::new(red, green, blue),
+        }
+    }};
+
+    ($val:expr) => {{
+        let val = $val;
+        Color::new(val, val, val)
+    }};
+}
 
 #[cfg(test)]
 mod tests {
@@ -303,5 +316,14 @@ mod tests {
         expected_result.extend(pixel_data);
 
         assert_eq!(actual_result, expected_result);
+    }
+    #[test]
+    fn color_macro_test() {
+        let c = color!(1.0, 2.0, 3.0);
+        let e = Color::new(1.0, 2.0, 3.0);
+        assert_fuzzy_eq!(c, e);
+        let c = color!(1.0);
+        let e = Color::new(1.0, 1.0, 1.0);
+        assert_fuzzy_eq!(c, e);
     }
 }

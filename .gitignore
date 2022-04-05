@@ -1,3 +1,5 @@
 /target
 /output
 output.ppm
+output.png
+*.ppm
